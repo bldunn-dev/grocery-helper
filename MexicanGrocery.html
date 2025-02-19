@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mexican Grocery Helper</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css"
+    />
+  </head>
+  <body>
+    <main class="container">
+      <h1>Currency Converter</h1>
+      <label for="pesosPerDollar">Pesos per Dollar</label>
+      <input
+        type="number"
+        id="pesosPerDollar"
+        step="any"
+        placeholder="Enter rate"
+        required
+      />
+
+      <label for="pesosPerKg">Pesos per Kilogram</label>
+      <input
+        type="number"
+        id="pesosPerKg"
+        step="any"
+        placeholder="Enter rate"
+        required
+      />
+
+      <button id="calculate">Calculate</button>
+
+      <p><strong>Dollars per Pound:</strong> $<span id="result">-</span></p>
+    </main>
+
+    <script>
+      document
+        .getElementById("calculate")
+        .addEventListener("click", function () {
+          const pesosPerDollar = parseFloat(
+            document.getElementById("pesosPerDollar").value
+          );
+          const pesosPerKg = parseFloat(
+            document.getElementById("pesosPerKg").value
+          );
+
+          if (
+            isNaN(pesosPerDollar) ||
+            isNaN(pesosPerKg) ||
+            pesosPerDollar <= 0 ||
+            pesosPerKg <= 0
+          ) {
+            document.getElementById("result").textContent = "Invalid input";
+            return;
+          }
+
+          const dollarsPerKg = pesosPerKg / pesosPerDollar;
+          const dollarsPerPound = dollarsPerKg / 2.20462;
+
+          document.getElementById("result").textContent =
+            dollarsPerPound.toFixed(4);
+        });
+    </script>
+  </body>
+</html>
